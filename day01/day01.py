@@ -1,9 +1,19 @@
-with open('input.txt', 'r') as file:
-    puzzle_input = [int(number_line) for number_line in file]
+import os
 
+from utils import get_data, map_list
+
+
+# INPUT SECTION
+DIR_ROOT = os.path.dirname(__file__)
+puzzle_input = map_list(int, get_data(DIR_ROOT).split())
+
+
+# GLOBAL VALUES
 SUM_TO_FIND = 2020
 
-def find_two_sum():
+
+# MAIN FUNCTIONS
+def part_one():
     memo = set()
     for num in puzzle_input:
         num_to_find = SUM_TO_FIND - num
@@ -11,7 +21,7 @@ def find_two_sum():
             return num_to_find * num
         memo.add(num)
 
-def find_three_sum():
+def part_two():
     nums = sorted(puzzle_input)
     for i, num in enumerate(nums[:-2]):
         j, k = i+1, len(nums)-1
@@ -24,5 +34,8 @@ def find_three_sum():
             elif total_sum < SUM_TO_FIND:
                 j += 1
 
-print('Part 1:', find_two_sum())
-print('Part 2:', find_three_sum())
+
+# RUNNING FUNCTION
+if __name__ == "__main__":
+    print('Part 1:', part_one()) # 538464
+    print('Part 2:', part_two()) # 278783190

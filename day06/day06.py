@@ -14,13 +14,17 @@ Part two per group ask for the total count of the Intersect of those
 sets in the group. (e.g. 'ab' & 'ac' == 'a' )
 """
 
-from utils import get_data
 import os
+
+from utils import get_data, map_list, map_sum
 
 
 # INPUT SECTION
 DIR_ROOT = os.path.dirname(__file__)
-input_text = get_data(DIR_ROOT)
+groups = [
+    map_list(set, group.split())
+    for group in get_data(DIR_ROOT).split('\n\n')
+]
 
 
 # MAIN FUNCTIONS
@@ -28,19 +32,13 @@ def part_one():
     """TIME COMPLEXITY: O(N)
     where N is the number of all the characters in the input
     """
-    return sum(
-        len(set.union(*(map(set, group.split()))))
-        for group in input_text.split('\n\n')
-    )
+    return sum(len(set.union(*group)) for group in groups)
 
 def part_two():
     """TIME COMPLEXITY: O(N)
     where N is the number of all the characters in the input
     """
-    return sum(
-        len(set.intersection(*(map(set, group.split()))))
-        for group in input_text.split('\n\n')
-    )
+    return sum(len(set.intersection(*group)) for group in groups)
 
 
 # RUNNING FUNCTION
