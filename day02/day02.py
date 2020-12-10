@@ -34,5 +34,5 @@ def part_two():
 
 # RUNNING FUNCTION
 if __name__ == "__main__":
-    print('Part 1:', part_one()) # 546
-    print('Part 2:', part_two()) # 275
+    print('Part 1:', part_one())
+    print('Part 2:', part_two())
