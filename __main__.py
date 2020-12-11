@@ -24,8 +24,8 @@ def _run_module(day):
         print('  Making new directory from boilerplate...', end='')
         _make_boilerplate(day)
         print('DONE!')
-    except Exception as e:
-        print(' ', e)
+    #except Exception as e:
+    #    print(' ', e)
 
 
 def _get_days():

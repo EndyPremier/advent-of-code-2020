@@ -13,9 +13,6 @@ DIR_ROOT = os.path.dirname(__file__)
 instructions = map_list(get_op, get_data(DIR_ROOT).split('\n'))
 
 
-# GLOBAL VALUES
-
-
 # HELPER FUNCTIONS
 def run_op(line, val):
     op, arg = instructions[line]

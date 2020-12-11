@@ -4,19 +4,9 @@ from collections import Counter
 from utils import get_data, map_list
 
 
-# INPUT HELPERS
-
-
 # INPUT SECTION
 DIR_ROOT = os.path.dirname(__file__)
 puzzle_input = map_list(int, get_data(DIR_ROOT).split())
-
-
-# GLOBAL VALUES
-
-
-# HELPER FUNCTIONS
-
 
 
 # MAIN FUNCTIONS
