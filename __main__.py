@@ -6,6 +6,7 @@ import shutil
 def _make_boilerplate(day):
     shutil.copytree('day00', f'day{day:02}')
     shutil.move(f'day{day:02}/day00.py', f'day{day:02}/day{day:02}.py')
+    open(f'day{day:02}/input.txt', 'a').close()
 
 
 REQUIRED_METHODS = ('part_one', 'part_two')
