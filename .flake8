@@ -1,0 +1,20 @@
+[flake8]
+ignore =
+    E201,
+    E202,
+    E221,
+    E226,
+    E302,
+    E303,
+    E305,
+    E401,
+    E741,
+    E731
+exclude =
+    .git,
+    __pycache__,
+    docs/source/conf.py,
+    old,
+    build,
+    dist,
+    venv

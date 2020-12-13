@@ -16,7 +16,7 @@ sets in the group. (e.g. 'ab' & 'ac' == 'a' )
 
 import os
 
-from utils import get_data, map_list, map_sum
+from utils import get_data, map_list
 
 
 # INPUT SECTION

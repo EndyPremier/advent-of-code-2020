@@ -28,7 +28,7 @@ def part_one():
     return trees_hit(3, 1)
 
 def part_two():
-    args = [(1,1), (3,1), (5,1), (7,1), (1,2)]
+    args = [(1,1), (3,1), (5,1), (7,1), (1,2)]    # noqa: E231
     return prod(trees_hit(*arg) for arg in args)
 
 

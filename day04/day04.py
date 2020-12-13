@@ -37,7 +37,7 @@ def part_two():
         try:
             for field, regex in FIELD_REGEX.items():
                 assert re.fullmatch(regex, passport[field])
-        except Exception as e:
+        except Exception:
             return False
         return True
 

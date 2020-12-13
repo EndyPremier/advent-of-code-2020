@@ -1,7 +1,7 @@
 import os, re
 from collections import defaultdict
 
-from utils import get_data, map_dict, map_sum
+from utils import get_data, map_dict
 
 
 # INPUT HELPERS

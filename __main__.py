@@ -30,7 +30,7 @@ def _run_module(day):
 
 
 def _get_days():
-    start = datetime(2020,12,1, tzinfo=tz.gettz('EST'))
+    start = datetime(2020, 12, 1, tzinfo=tz.gettz('EST'))
     curr  = datetime.now(tz=tz.tzlocal())
     days  = (curr - start).days + 1
     return min(days, 25)
