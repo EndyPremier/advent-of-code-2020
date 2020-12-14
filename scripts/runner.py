@@ -7,7 +7,7 @@ def make_boilerplate(day):
     open(f'day{day:02}/input.txt', 'a').close()
 
 
-def run_module(day):
+def run_module(day, auto_new=False):
     print(f'Day {day:02}')
     try:
         module_name = f'day{day:02}.day{day:02}'
@@ -16,6 +16,11 @@ def run_module(day):
         print('  Part 2:', module.part_two())
     except ModuleNotFoundError as e:
         print(' ', e)
-        print(f'  Do you mean `python . make -d {day}`?')
+        if auto_new:
+            print('  Making new directory from boilerplate...', end='')
+            make_boilerplate(day)
+            print('DONE!')
+        else:
+            print(f'  Do you mean `python . make -d {day}`?')
     except Exception as e:
         print(' ', e)

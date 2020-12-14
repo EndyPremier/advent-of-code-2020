@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from datetime import datetime
 from dateutil import tz
 
-from scripts.runner import run_module, make_boilerplate
+from scripts import runner, convert
 
 
 def get_days():
@@ -14,35 +14,35 @@ def get_days():
 
 
 parser = ArgumentParser(prog='python .')
-parser.add_argument('action',
-                    action='store',
-                    nargs='?',
-                    choices=['run', 'make', 'tex'],
-                    default='run')
-parser.add_argument('-d', '--day',
-                    action='store',
-                    type=int,
+parser.add_argument('action', action='store', nargs='?', default='run',
+                    choices=['run', 'make', 'tex'])
+parser.add_argument('-d', '--day', action='store', nargs='?', type=int,
                     default=None)
-
-def raise_empty_days_error():
-    parser.error(f'argument -d/--day: invalid choice: {args.day} '
-                 '(choose between 1 to 25 inclusive)')
+parser.add_argument('-t', '--tex', action='store', nargs='?', default=None)
+parser.add_argument('-f', '--file', action='store', nargs='?', default=None)
 
 
 if __name__ == "__main__":
     args = parser.parse_args()
     if args.day is not None and args.day not in range(1, 26):
-        raise_empty_days_error()
+        parser.error(f'argument -d/--day: invalid choice: {args.day} '
+                     '(choose between 1 to 25 inclusive)')
 
     if args.action == 'run':
         if args.day is None:
             for i in range(1, get_days() + 1):
-                run_module(i)
+                runner.run_module(i, auto_new=True)
         else:
-            run_module(args.day)
+            runner.run_module(args.day)
     elif args.day is None:
-        raise_empty_days_error()
+        parser.error('argument -d/--day: Day must be required')
     elif args.action == 'make':
-        make_boilerplate(args.day)
+        print(f'Making boilerplate code for Day {args.day}... ', end='')
+        runner.make_boilerplate(args.day)
+        print('DONE!')
+    elif args.tex is None:
+        parser.error('argument tex: require tex input')
     elif args.action == 'tex':
-        pass
+        print('Creating file...')
+        file = convert.make_tex_image(args.tex, args.day, args.file)
+        print('DONE!')
