@@ -1,5 +1,7 @@
 import shutil
 
+from utils import run
+
 
 def make_boilerplate(day):
     shutil.copytree('day00', f'day{day:02}')
@@ -12,8 +14,7 @@ def run_module(day, auto_new=False):
     try:
         module_name = f'day{day:02}.day{day:02}'
         module = __import__(module_name, fromlist=('part_one', 'part_two'))
-        print('  Part 1:', module.part_one())
-        print('  Part 2:', module.part_two())
+        run(module.part_one, module.part_two, pad='  ')
     except ModuleNotFoundError as e:
         print(' ', e)
         if auto_new:

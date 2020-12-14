@@ -12,7 +12,7 @@ def gen_filename(s):
 def make_tex_image(tex, day, file=None):
     if file is None:
         file = gen_filename(tex)
-    filename = f'day{day:02}/img/{file}'
+    filename = f'problems/day{day:02}/img/{file}'
     try:
         preview(tex, viewer='file', filename=filename, euler=False)
         return filename

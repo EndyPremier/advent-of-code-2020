@@ -1,4 +1,14 @@
 import os
+from time import perf_counter
+
+
+def run(*parts, pad=''):
+    for i, part in enumerate(parts, start=1):
+        start  = perf_counter()
+        answer = part()
+        end    = perf_counter()
+        timed  = end - start
+        print(f'{pad}Part {i}: {answer:<16} [{timed:0.6f}s]')
 
 
 def get_data(dir):

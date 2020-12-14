@@ -2,7 +2,7 @@ import os
 from itertools import count
 from math import prod
 
-from utils import get_data, map_list
+from utils import get_data, run, map_list
 
 
 # INPUT HELPER FUNCTIONS
@@ -34,5 +34,4 @@ def part_two():
 
 # RUNNING FUNCTION
 if __name__ == "__main__":
-    print('Part 1:', part_one())
-    print('Part 2:', part_two())
+    run(part_one, part_two)

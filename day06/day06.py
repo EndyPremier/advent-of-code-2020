@@ -16,7 +16,7 @@ sets in the group. (e.g. 'ab' & 'ac' == 'a' )
 
 import os
 
-from utils import get_data, map_list
+from utils import get_data, run, map_list
 
 
 # INPUT SECTION
@@ -43,5 +43,4 @@ def part_two():
 
 # RUNNING FUNCTION
 if __name__ == "__main__":
-    print('Part 1:', part_one())
-    print('Part 2:', part_two())
+    run(part_one, part_two)
