@@ -1,4 +1,5 @@
 import shutil
+from os import mkdir
 
 from utils import run
 
@@ -7,6 +8,7 @@ def make_boilerplate(day):
     shutil.copytree('day00', f'day{day:02}')
     shutil.move(f'day{day:02}/day00.py', f'day{day:02}/day{day:02}.py')
     open(f'day{day:02}/input.txt', 'a').close()
+    mkdir(f'day{day:02}/img')
 
 
 def run_module(day, auto_new=False):

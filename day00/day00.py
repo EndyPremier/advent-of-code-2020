@@ -7,23 +7,25 @@ from utils import get_data, run
 
 
 # INPUT SECTION
-DIR_ROOT = os.path.dirname(__file__)
-puzzle_input = get_data(DIR_ROOT)
-
-
-# GLOBAL VALUES
+def get_input():
+    DIR_ROOT = os.path.dirname(__file__)
+    puzzle_input = get_data(DIR_ROOT)
+    return puzzle_input
 
 
 # HELPER FUNCTIONS
 
 
+# GLOBAL VALUES
+
+
 
 # MAIN FUNCTIONS
 def part_one():
-    pass
+    return -1
 
 def part_two():
-    pass
+    return -1
 
 
 # RUNNING FUNCTION
