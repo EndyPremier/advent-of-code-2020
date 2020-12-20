@@ -1,4 +1,4 @@
-import os, re
+import os
 
 from utils import get_data, run
 
@@ -9,7 +9,7 @@ from utils import get_data, run
 # INPUT SECTION
 def get_input():
     DIR_ROOT = os.path.dirname(__file__)
-    puzzle_input = get_data(DIR_ROOT).split('\n')
+    puzzle_input = get_data(DIR_ROOT)
     return puzzle_input
 
 
