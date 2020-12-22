@@ -8,7 +8,7 @@ def run(*parts, pad=''):
         answer = part()
         end    = perf_counter()
         timed  = end - start
-        print(f'{pad}Part {i}: {answer:<16} [{timed:0.6f}s]')
+        print(f'{pad}[{timed:0.6f}s] Part {i}: {answer}')
 
 
 def get_data(dir):
