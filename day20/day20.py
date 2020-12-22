@@ -1,8 +1,8 @@
 import os, re
-from collections import defaultdict
-from math import prod, sqrt
+from collections import Counter, defaultdict
+from math import prod
 
-from utils import get_data, run, map_sum
+from utils import get_data, run
 
 
 # INPUT SECTION
@@ -15,16 +15,10 @@ def get_input():
 # HELPER FUNCTIONS
 ## INPUT PROCESSSING
 def process_tile_borders(tile):
-    return {
-        'nU': tile[:10],          # normal  up
-        'nR': tile[9::11],        # normal  right
-        'nD': tile[-10:][::-1],   # normal  dowm
-        'nL': tile[::11][::-1],   # normal  left
-        'fL': tile[::11],         # flipped left
-        'fD': tile[-10:],         # flipped down
-        'fR': tile[9::11][::-1],  # flipped right
-        'fU': tile[:10][::-1],    # flipped up
-    }
+    yield ''.join(sorted((tile[:10], tile[:10][::-1])))      # up
+    yield ''.join(sorted((tile[9::11], tile[9::11][::-1])))  # right
+    yield ''.join(sorted((tile[-10:][::-1], tile[-10:])))    # dowm
+    yield ''.join(sorted((tile[::11][::-1], tile[::11])))    # left
 
 TILE_REGEX = r'Tile (\d+):\n(([.#]{10}\n?){10})'
 def extract_tile(tile_input):
@@ -34,65 +28,57 @@ def extract_tile(tile_input):
 
 def extract_input(puzzle_input):
     tiles = {}
-    borders = {}
     for tile_input in puzzle_input.split('\n\n'):
         tile_id, tile = extract_tile(tile_input)
-        tile_borders = process_tile_borders(tile)
         tiles[tile_id] = tile
-        borders[tile_id] = tile_borders
-    return tiles, borders
+    return tiles
 
-## BORDER CONNECTION
-def connect_borders(tiles):
-    def defaultdict_section():
-        def empty_tuple():
-            return (None, None)
-        return defaultdict(empty_tuple)
-    border_count = defaultdict(lambda: 0)
-    section_to_border = {}
-    border_to_borders = defaultdict(defaultdict_section)
-    for tile_a, tile in tiles.items():
-        for region_a, section in tile.items():
-            border_count[section] += 1
-            section = section[::-1]
-            border_count[section] += 1
-            if section in section_to_border:
-                tile_b, region_b = section_to_border[section]
-                border_to_borders[tile_a][region_a] = (tile_b, region_b)
-                border_to_borders[tile_b][region_b] = (tile_a, region_a)
-            else:
-                section_to_border[section] = (tile_a, region_a)
-    print(border_count)
-    return border_to_borders
+## PROCESS
+def get_border_group(tiles):
+    return {
+        tile_id: list(process_tile_borders(tile))
+        for tile_id, tile in tiles.items()
+    }
 
-def is_corner(border: dict):
-    return map_sum(lambda n: n != (None, None), border.values()) == 4
+def get_border_count(border_group):
+    border_count = defaultdict(set)
+    for tile_id, borders in border_group.items():
+        for border in borders:
+            border_count[border].add(tile_id)
+    return border_count
+
+def is_corner(borders, border_count):
+    edge_count = sum(len(border_count[border]) == 1 for border in borders)
+    return edge_count == 2
+
+def get_corners(border_group, border_count):
+    return (
+        tile_id
+        for tile_id, borders in border_group.items()
+        if is_corner(borders, border_count)
+    )
+
+def get_first_corner(border_group, border_count):
+    for tile_id, borders in border_group.items():
+        if is_corner(borders, border_count):
+            return tile_id
 
 # GLOBAL VALUES
-puzzle_input = get_input()
-tiles, borders = extract_input(puzzle_input)
-connections = connect_borders(borders)
 
-"""
-assertion:
-- all connection between tiles are unique
-- corner have 4 filled entries,
-- edges have 6 filled entries,
-- and center patch has 8 filled entires.
-- just check if the tile are just corners
-"""
 
 
 # MAIN FUNCTIONS
 def part_one():
-    return prod(
-        tile_id
-        for tile_id, tile in connections.items()
-        if is_corner(tile)
-    )
+    tiles = extract_input(get_input())
+    border_group = get_border_group(tiles)
+    border_count = get_border_count(border_group)
+    corners = get_corners(border_group, border_count)
+    return prod(corners)
 
 def part_two():
-    return -1
+    tiles = extract_input(get_input())
+    border_group = get_border_group(tiles)
+    border_count = get_border_count(border_group)
 
 
 # RUNNING FUNCTION

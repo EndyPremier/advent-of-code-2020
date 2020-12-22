@@ -22,10 +22,10 @@ def get_input():
 
 # MAIN FUNCTIONS
 def part_one():
-    return -1
+    pass
 
 def part_two():
-    return -1
+    pass
 
 
 # RUNNING FUNCTION
