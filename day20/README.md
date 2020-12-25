@@ -4,6 +4,8 @@
 
 ## Explaination
 
+> Note: Much of the solution was dealt with ~~stealing~~ refering to [This solution](https://gist.github.com/tomKPZ/6932a5b8d9eaad13a9abbfc80ee8f928) by [tomKPZ](https://github.com/tomKPZ)
+
 {##}
 
 ### Part One
