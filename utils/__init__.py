@@ -20,6 +20,7 @@ def get_data(dir):
 mapf = lambda f: lambda *args, **kwargs: f(map(*args, **kwargs))
 map_sum   = mapf(sum   )
 map_list  = mapf(list  )
+map_set   = mapf(set   )
 map_dict  = mapf(dict  )
 map_sort  = mapf(sorted)
 map_tuple = mapf(tuple )
